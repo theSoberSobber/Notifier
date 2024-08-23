@@ -26,8 +26,8 @@ class NotifierService:
         else:
             for submission in submissions[:MAX_NOTIFICATIONS]:
                 problem_name = submission["problem"]["name"]
-                problem_url = f"https://codeforces.com/contest/{submission['contestId']}/problem/{submission['problem']['index']}"
-                submission_url = f"https://codeforces.com/contest/{submission['contestId']}/submission/{submission['id']}"
+                problem_url = f"https://codeforces.com/contest/{submission['problem'].get('contestId') or submission['problem'].get('problemsetName')}/problem/{submission['problem']['index']}"
+                submission_url = f"https://codeforces.com/contest/{submission['problem'].get('contestId') or submission['problem'].get('problemsetName')}/submission/{submission['id']}"
                 self.send_notification(handle, problem_name, problem_url, submission_url)
 
             if len(submissions) >= MAX_NOTIFICATIONS:

@@ -69,10 +69,10 @@ class Codeforces:
             return to_return
 
         seen_problems = set()
-
         for i in range(current_count-previous_count):
             submission = self.submissions[i]
-            problem_id = submission['problem']['contestId'], submission['problem']['index']
+            problem_id = submission['problem'].get('contestId') or submission['problem'].get('problemsetName'), submission['problem']['index']
+            
             if problem_id in seen_problems:
                 continue
             to_return["submissions"].append(submission)
