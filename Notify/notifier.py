@@ -15,7 +15,7 @@ class NotifierService:
     def notify_rollback(self, handle):
         title = f"Rollback detected for {handle}"
         message = "Submissions have decreased. Rollback in progress."
-        cmd = f'ntfy publish --title "{title}" --priority high --tags "warning" --message "{message}" {CHANNEL_NAME}'
+        cmd = f'ntfy publish --title "{title}" --priority high --tags "warning" --message "{message}" {CHANNEL_NAME}_HEALTH'
         os.system(cmd)
         time.sleep(NTFY_RATE_LIMIT)
 
@@ -36,7 +36,7 @@ class NotifierService:
     def send_403_notification(self, url, timestamp):
         title = "Codeforces API 403 Error"
         message = f"403 error occurred at {timestamp}. URL: {url}"
-        cmd = f'ntfy publish --title "{title}" --priority max --tags "error" --message "{message}" --click="{url}" {CHANNEL_NAME}'
+        cmd = f'ntfy publish --title "{title}" --priority max --tags "error" --message "{message}" --click="{url}" {CHANNEL_NAME}_HEALTH'
         os.system(cmd)
         time.sleep(NTFY_RATE_LIMIT)
 
